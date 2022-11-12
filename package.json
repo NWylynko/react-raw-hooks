@@ -3,8 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "build": "tsc",
+    "build:watch": "tsc --watch",
     "test": "vitest"
   },
+
+  "sideEffects": false,
+  "files": [
+    "./hooks/**/*.ts"
+  ],
   "dependencies": {},
   "peerDependencies": {
     "react": "18"
