@@ -4,7 +4,6 @@ type Options = {
   min: number,
   max: number,
   step: number,
-  throwError: boolean
 }
 
 export const useCount = (initialCount: number = 0, options: Partial<Options> = {}) => {
