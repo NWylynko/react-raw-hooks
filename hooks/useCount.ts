@@ -10,8 +10,8 @@ type Options = {
 export const useCount = (initialCount: number = 0, options: Partial<Options> = {}) => {
 
   const {
-    min,
-    max,
+    min = undefined,
+    max = undefined,
     step = 1
   } = options
 
