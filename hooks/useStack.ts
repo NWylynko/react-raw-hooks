@@ -12,7 +12,7 @@ export const useStack = <T,>(initialStack: T[] = [], options: Partial<Options> =
   } = options
 
   const [fullStack, setStack] = useState<T[]>(initialStack);
-  const [pointer, { increment, decrement }] = useCount(fullStack.length, { min: minStackCount });
+  const [pointer, { increment, decrement }] = useCount(initialStack.length, { min: minStackCount });
 
   const add = (obj: T) => {
     const newStack = stack.slice(0, pointer)
