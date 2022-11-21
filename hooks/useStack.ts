@@ -1,9 +1,18 @@
 import { useState } from "react"
 import { useCount } from "./useCount";
 
-export const useStack = <T,>(initialStack: T[] = []) => {
+type Options = {
+  minStackCount: number,
+}
+
+export const useStack = <T,>(initialStack: T[] = [], options: Partial<Options> = {}) => {
+
+  const {
+    minStackCount = 0, // by default the stack can have 0 items in it
+  } = options
+
   const [fullStack, setStack] = useState<T[]>(initialStack);
-  const [pointer, { increment, decrement }] = useCount(fullStack.length);
+  const [pointer, { increment, decrement }] = useCount(fullStack.length, { min: minStackCount });
 
   const add = (obj: T) => {
     const newStack = stack.slice(0, pointer)
@@ -12,11 +21,13 @@ export const useStack = <T,>(initialStack: T[] = []) => {
   }
 
   const stack = fullStack.slice(0, pointer)
-  const canMoveBackwards = pointer > 0;
+  const topOfStack = stack[pointer - 1]
+  const canMoveBackwards = pointer > minStackCount;
   const canMoveForwards = pointer < fullStack.length
 
   return {
     stack,
+    topOfStack,
     add,
     back: decrement,
     forward: increment,
