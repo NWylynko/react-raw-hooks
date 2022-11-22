@@ -30,9 +30,19 @@ export const useInput = (initialInput: string = "", options: Partial<Options> = 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const newValue = e.target.value
 
-    if (newValue.length > minLength && newValue.length < maxLength) {
-      setValue(newValue)
+    if (maxLength !== undefined) {
+      if (newValue.length > maxLength) {
+        return;
+      }
     }
+
+    if (minLength !== undefined) {
+      if (newValue.length < minLength) {
+        return;
+      }
+    }
+
+    setValue(newValue)
   }
 
   const clear = () => setValue("")
