@@ -1,6 +1,6 @@
 {
   "name": "react-raw-hooks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "typecheck": "tsc",
     "typecheck:watch": "tsc --watch",
