@@ -1,17 +1,51 @@
 import { useState } from 'react';
 
+type Options = {
+  maxLength?: number;
+  minLength?: number;
+}
+
+export const useInput = (initialInput: string = "", options: Partial<Options> = {}) => {
+
+  const {
+    minLength = undefined,
+    maxLength = undefined
+  } = options
+
+  if (minLength !== undefined) {
+    if (initialInput.length < minLength) {
+      throw new Error(`Initial length of value is less then minimum allowed length`)
+    }
+  }
+
+  if (maxLength !== undefined) {
+    if (initialInput.length > maxLength) {
+      throw new Error(`Initial length is more than the maximum allowed length`)
+    }
+  }
 
 
-
-export const useInput = (initialInput: string = "") => {
   const [value, setValue] = useState<string>(initialInput)
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue(e.target.value)
+    const newValue = e.target.value
+
+    if (newValue.length > minLength && newValue.length < maxLength) {
+      setValue(newValue)
+    }
   }
+
+  const clear = () => setValue("")
+  const reset = () => setValue(initialInput)
   
-  return {
-    value,
-    onChange
-  }
+  return [
+    {
+      value,
+      onChange
+    },
+    {
+      clear,
+      reset
+    }
+  ] as const
 }
