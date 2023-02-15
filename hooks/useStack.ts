@@ -1,28 +1,27 @@
 import { useCount } from "./useCount";
-import { useArray } from './useArray';
+import { useArray } from "./useArray";
 
 type Options = {
-  minStackCount: number,
-}
+  minStackCount: number;
+};
 
 export const useStack = <T,>(initialStack: T[] = [], options: Partial<Options> = {}) => {
-
   const {
     minStackCount = 0, // by default the stack can have 0 items in it
-  } = options
+  } = options;
 
   const [fullStack, { push }] = useArray<T>(initialStack);
   const [pointer, { increment, decrement }] = useCount(initialStack.length, { min: minStackCount });
 
   const add = (obj: T) => {
-    push(obj)
+    push(obj);
     increment();
-  }
+  };
 
-  const stack = fullStack.slice(0, pointer)
-  const topOfStack: T | undefined = stack[pointer - 1]
+  const stack = fullStack.slice(0, pointer);
+  const topOfStack: T | undefined = stack[pointer - 1];
   const canMoveBackwards = pointer > minStackCount;
-  const canMoveForwards = pointer < fullStack.length
+  const canMoveForwards = pointer < fullStack.length;
 
   return {
     stack,
@@ -31,6 +30,6 @@ export const useStack = <T,>(initialStack: T[] = [], options: Partial<Options> =
     back: decrement,
     forward: increment,
     canMoveBackwards,
-    canMoveForwards
-  }
-}
+    canMoveForwards,
+  };
+};

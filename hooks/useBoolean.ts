@@ -1,34 +1,33 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 export const useBoolean = (initialBoolean: boolean, onChange?: (value: boolean) => void) => {
-
-  const [boolean, setBoolean] = useState(initialBoolean)
+  const [boolean, setBoolean] = useState(initialBoolean);
 
   useEffect(() => {
-    onChange && onChange(boolean)
-  }, [boolean])
+    onChange?.(boolean);
+  }, [boolean]);
 
   const setTrue = () => {
-    setBoolean(true)
-  }
+    setBoolean(true);
+  };
 
   const setFalse = () => {
-    setBoolean(false)
-  }
+    setBoolean(false);
+  };
 
   const toggle = () => {
-    setBoolean(s => !s)
-  }
+    setBoolean((s) => !s);
+  };
 
-  const set = setBoolean
+  const set = setBoolean;
 
   return [
-    boolean, {
+    boolean,
+    {
       setTrue,
       setFalse,
       toggle,
-      set
-    }
-  ] as const
-
-}
+      set,
+    },
+  ] as const;
+};

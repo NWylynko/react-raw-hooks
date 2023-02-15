@@ -1,100 +1,100 @@
-import { expect, it } from 'vitest';
-import { act, renderHook } from '@testing-library/react';
+import { expect, it } from "vitest";
+import { act, renderHook } from "@testing-library/react";
 
-import { useArray } from './useArray';
+import { useArray } from "./useArray";
 
-const groceries = ["potato's", "beans", "ice-cream"]
+const groceries = ["potato's", "beans", "ice-cream"];
 
-it('should accept an initial array', () => {
+it("should accept an initial array", () => {
   const { result } = renderHook(() => useArray(groceries));
 
-  expect(result.current[0].length).toBe(groceries.length)
-})
+  expect(result.current[0].length).toBe(groceries.length);
+});
 
 it('should "fill" values in to the array', () => {
   const { result } = renderHook(() => useArray(groceries));
 
   act(() => {
-    result.current[1].fill("cake", 0, 3)
-  })
+    result.current[1].fill("cake", 0, 3);
+  });
 
-  expect(result.current[0]).toStrictEqual(["cake", "cake", "cake"])
-})
+  expect(result.current[0]).toStrictEqual(["cake", "cake", "cake"]);
+});
 
 it('should "pop" and item off the back of the array', () => {
   const { result } = renderHook(() => useArray(groceries));
 
   act(() => {
-    result.current[1].pop()
-  })
+    result.current[1].pop();
+  });
 
-  expect(result.current[0]).toStrictEqual(["potato's", "beans"])
-  expect(result.current[0].length).toBe(groceries.length - 1)
-})
+  expect(result.current[0]).toStrictEqual(["potato's", "beans"]);
+  expect(result.current[0].length).toBe(groceries.length - 1);
+});
 
 it('should "push" an item on the back of the array', () => {
   const { result } = renderHook(() => useArray(groceries));
 
   act(() => {
-    result.current[1].push("cake")
-  })
+    result.current[1].push("cake");
+  });
 
   expect(result.current[0].length).toBe(groceries.length + 1);
-  expect(result.current[0].includes("cake")).toBe(true)
-  expect(result.current[0][groceries.length]).toBe("cake")
-})
+  expect(result.current[0].includes("cake")).toBe(true);
+  expect(result.current[0][groceries.length]).toBe("cake");
+});
 
 it('should "reverse" the array', () => {
   const { result } = renderHook(() => useArray(groceries));
 
   act(() => {
-    result.current[1].reverse()
-  })
+    result.current[1].reverse();
+  });
 
-  expect(result.current[0]).toStrictEqual(["ice-cream", "beans", "potato's"])
-})
+  expect(result.current[0]).toStrictEqual(["ice-cream", "beans", "potato's"]);
+});
 
 it('should "shift" the first element out of the array', () => {
   const { result } = renderHook(() => useArray(groceries));
 
   act(() => {
-    result.current[1].shift()
-  })
+    result.current[1].shift();
+  });
 
-  expect(result.current[0]).toStrictEqual(["beans", "ice-cream"])
-  expect(result.current[0].length).toBe(2)
-  expect(result.current[0].includes("potato's")).toBe(false)
-})
+  expect(result.current[0]).toStrictEqual(["beans", "ice-cream"]);
+  expect(result.current[0].length).toBe(2);
+  expect(result.current[0].includes("potato's")).toBe(false);
+});
 
 it('should "sort" the array by the compare function', () => {
   const { result } = renderHook(() => useArray(groceries));
 
   act(() => {
-    result.current[1].sort()
-  })
+    result.current[1].sort();
+  });
 
-  expect(result.current[0]).toStrictEqual(["beans", "ice-cream", "potato's"])
-  expect(result.current[0]).toStrictEqual(["beans", "ice-cream", "potato's"])
-})
+  expect(result.current[0]).toStrictEqual(["beans", "ice-cream", "potato's"]);
+  expect(result.current[0]).toStrictEqual(["beans", "ice-cream", "potato's"]);
+});
 
 it('should "splice" the array to get a subset', () => {
-  const { result } = renderHook(() => useArray(['Jan', 'March', 'April', 'June']));
+  const { result } = renderHook(() => useArray(["Jan", "March", "April", "June"]));
 
   act(() => {
-    result.current[1].splice(1, 0, 'Feb')
-  })
+    result.current[1].splice(1, 0, "Feb");
+  });
 
-  expect(result.current[0]).toStrictEqual(["Jan", "Feb", "March", "April", "June"])
-})
+  expect(result.current[0]).toStrictEqual(["Jan", "Feb", "March", "April", "June"]);
+});
 
 it('should "unshift" an item to the start of the array', () => {
   const { result } = renderHook(() => useArray(groceries));
 
   act(() => {
-    result.current[1].unshift("cake")
-  })
+    result.current[1].unshift("cake");
+  });
 
   expect(result.current[0].length).toBe(groceries.length + 1);
-  expect(result.current[0].includes("cake")).toBe(true)
-  expect(result.current[0][0]).toBe("cake")
-})
+  expect(result.current[0].includes("cake")).toBe(true);
+  expect(result.current[0][0]).toBe("cake");
+});

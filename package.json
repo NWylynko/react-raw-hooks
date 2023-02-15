@@ -31,6 +31,7 @@
     "bumpp": "^8.2.1",
     "jsdom": "^20.0.2",
     "react-dom": "^18.2.0",
+    "rome": "^11.0.0",
     "typescript": "5.0.0-beta",
     "vitest": "^0.25.1"
   }

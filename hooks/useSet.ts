@@ -1,29 +1,28 @@
-import { useState } from "react"
+import { useState } from "react";
 
-export const useSet = <Value, > (initialSet = new Set<Value>()) => {
-
+export const useSet = <Value,>(initialSet = new Set<Value>()) => {
   const [set, updateSet] = useState(new Set(initialSet));
 
   const addItem = (value: Value) => {
     updateSet((currentSet) => {
-      currentSet.add(value)
-      return new Set(currentSet)
-    })
-  }
+      currentSet.add(value);
+      return new Set(currentSet);
+    });
+  };
 
   const clearSet = () => {
     updateSet((currentSet) => {
-      currentSet.clear()
-      return new Set(currentSet)
-    })
-  }
+      currentSet.clear();
+      return new Set(currentSet);
+    });
+  };
 
   const deleteItem = (value: Value) => {
     updateSet((currentSet) => {
-      currentSet.delete(value)
-      return new Set(currentSet)
-    })
-  }
+      currentSet.delete(value);
+      return new Set(currentSet);
+    });
+  };
 
   return {
     add: addItem,
@@ -34,7 +33,6 @@ export const useSet = <Value, > (initialSet = new Set<Value>()) => {
     has: set.has.bind(set),
     keys: set.keys.bind(set),
     size: set.size,
-    values: set.values.bind(set)
-  } as Set<Value>
-
-}
+    values: set.values.bind(set),
+  } as Set<Value>;
+};

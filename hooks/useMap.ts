@@ -1,29 +1,28 @@
-import { useState } from "react"
+import { useState } from "react";
 
-export const useMap = <Key, Value, > (initialMap = new Map<Key, Value>()) => {
-
+export const useMap = <Key, Value>(initialMap = new Map<Key, Value>()) => {
   const [map, setMap] = useState(new Map(initialMap));
 
   const clearMap = () => {
     setMap((currentMap) => {
-      currentMap.clear()
-      return new Map(currentMap)
-    })
-  }
+      currentMap.clear();
+      return new Map(currentMap);
+    });
+  };
 
   const deleteItem = (key: Key) => {
     setMap((currentMap) => {
       currentMap.delete(key);
-      return new Map(currentMap)
-    })
-  }
+      return new Map(currentMap);
+    });
+  };
 
   const setItem = (key: Key, value: Value) => {
     setMap((currentMap) => {
       currentMap.set(key, value);
-      return new Map(currentMap)
-    })
-  }
+      return new Map(currentMap);
+    });
+  };
 
   return {
     size: map.size,
@@ -35,7 +34,6 @@ export const useMap = <Key, Value, > (initialMap = new Map<Key, Value>()) => {
     values: map.values.bind(map),
     clear: clearMap,
     delete: deleteItem,
-    set: setItem
-  } as Map<Key, Value>
-
-}
+    set: setItem,
+  } as Map<Key, Value>;
+};
