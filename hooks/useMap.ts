@@ -1,7 +1,5 @@
 import { useState } from "react"
 
-
-
 export const useMap = <Key, Value, > (initialMap = new Map<Key, Value>()) => {
 
   const [map, setMap] = useState(new Map(initialMap));

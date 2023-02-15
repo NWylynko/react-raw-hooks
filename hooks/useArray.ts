@@ -1,81 +1,60 @@
 import { useState } from 'react';
 
-
-
 export const useArray = <Value,> (initialArray: Array<Value> = []) => {
 
   const [array, setArray] = useState<Value[]>(Array.from(initialArray))
 
-  const fillArray: Array<Value>["fill"] = (value, start, end) => {
-    let newArray: Value[]
+  const fillArray = (value: Value, start: number | undefined, end: number | undefined) => {
     setArray(currentArray => {
-      newArray = currentArray.fill(value, start, end)
-      return newArray
+      return currentArray.fill(value, start, end)
     })
-    return newArray
   }
 
-  const popArray: Array<Value>["pop"] = () => {
-    let lastValue: Value;
+  const popArray = () => {
     setArray(currentArray => {
-      lastValue = currentArray.pop()
+      currentArray.pop()
       return currentArray
     })
-    return lastValue
   }
 
-  const pushArray: Array<Value>["push"] = (value) => {
-    let length: number;
+  const pushArray = (...items: Value[]) => {
     setArray(currentArray => {
-      length = currentArray.push(value);
+      currentArray.push(...items);
       return currentArray
     })
-    return length
   }
 
-  const reverseArray: Array<Value>["reverse"] = () => {
-    let newArray: Value[]
+  const reverseArray = () => {
     setArray(currentArray => {
-      newArray = currentArray.reverse()
-      return newArray
+      return currentArray.reverse()
     })
-    return newArray
   }
 
-  const shiftArray: Array<Value>["shift"] = () => {
-    let firstValue: Value;
+  const shiftArray = () => {
     setArray(currentArray => {
-      firstValue = currentArray.shift()
+      currentArray.shift()
       return currentArray
     })
-    return firstValue
   }
 
-  const sortArray: Array<Value>["sort"] = (compareFn) => {
-    let newArray: Value[]
+  const sortArray = (compareFn?: ((a: Value, b: Value) => number) | undefined) => {
     setArray(currentArray => {
-      newArray = currentArray.sort(compareFn)
-      return newArray
+      return currentArray.sort(compareFn)
     })
-    return newArray
   }
 
   const spliceArray = (start: number, deleteCount: number, ...items: Value[]) => {
-    let newArray: Value[]
     setArray(currentArray => {
-      newArray = currentArray.splice(start, deleteCount, ...items)
+      currentArray.splice(start, deleteCount, ...items)
       return currentArray
     })
-    return newArray
   }
 
-  const unshiftArray: Array<Value>["unshift"] = (value) => {
-    let newArray: Value[]
+  const unshiftArray = (...items: Value[]) => {
     setArray(currentArray => {
-      length = currentArray.unshift(value);
+      currentArray.unshift(...items);
       return currentArray
     })
-    return length
   }
 
   return [
@@ -86,7 +65,7 @@ export const useArray = <Value,> (initialArray: Array<Value> = []) => {
       reverse: reverseArray,
       shift: shiftArray,
       sort: sortArray,
-      splice: spliceArray as Array<Value>["splice"],
+      splice: spliceArray,
       unshift: unshiftArray
     }
   ] as const

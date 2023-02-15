@@ -24,7 +24,11 @@ it('should "fill" values in to the array', () => {
 it('should "pop" and item off the back of the array', () => {
   const { result } = renderHook(() => useArray(groceries));
 
-  expect(result.current[1].pop()).toBe("ice-cream")
+  act(() => {
+    result.current[1].pop()
+  })
+
+  expect(result.current[0]).toStrictEqual(["potato's", "beans"])
   expect(result.current[0].length).toBe(groceries.length - 1)
 })
 
@@ -53,7 +57,11 @@ it('should "reverse" the array', () => {
 it('should "shift" the first element out of the array', () => {
   const { result } = renderHook(() => useArray(groceries));
 
-  expect(result.current[1].shift()).toBe("potato's");
+  act(() => {
+    result.current[1].shift()
+  })
+
+  expect(result.current[0]).toStrictEqual(["beans", "ice-cream"])
   expect(result.current[0].length).toBe(2)
   expect(result.current[0].includes("potato's")).toBe(false)
 })
@@ -61,7 +69,11 @@ it('should "shift" the first element out of the array', () => {
 it('should "sort" the array by the compare function', () => {
   const { result } = renderHook(() => useArray(groceries));
 
-  expect(result.current[1].sort()).toStrictEqual(["beans", "ice-cream", "potato's"])
+  act(() => {
+    result.current[1].sort()
+  })
+
+  expect(result.current[0]).toStrictEqual(["beans", "ice-cream", "potato's"])
   expect(result.current[0]).toStrictEqual(["beans", "ice-cream", "potato's"])
 })
 

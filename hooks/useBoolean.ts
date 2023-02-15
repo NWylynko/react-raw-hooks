@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 
-
 export const useBoolean = (initialBoolean: boolean, onChange?: (value: boolean) => void) => {
 
   const [boolean, setBoolean] = useState(initialBoolean)

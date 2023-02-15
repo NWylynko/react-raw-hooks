@@ -39,8 +39,8 @@ it('should report the correct size', () => {
 it('should forEach over the map', () => {
   const { result } = renderHook(() => useMap(userInventory));
 
-  const original = []
-  const hooked = []
+  const original: number[] = []
+  const hooked: number[] = []
 
   userInventory.forEach((item) => {
     original.push(item)

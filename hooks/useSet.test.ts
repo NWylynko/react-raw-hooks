@@ -61,8 +61,8 @@ it('should iterate over the entries', () => {
 it('should forEach over the set', () => {
   const { result } = renderHook(() => useSet(groceries));
 
-  const original = []
-  const hooked = []
+  const original: string[] = []
+  const hooked: string[] = []
 
   groceries.forEach((item) => {
     original.push(item)
