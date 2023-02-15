@@ -9,7 +9,7 @@
   },
   "sideEffects": false,
   "files": [
-    "./hooks/**/*.ts"
+    "hooks"
   ],
   "types": "./empty.d.ts",
   "dependencies": {},
