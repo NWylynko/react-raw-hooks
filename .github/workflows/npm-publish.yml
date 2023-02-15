@@ -1,0 +1,37 @@
+name: Publish NPM Package
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v0.1.8
+        with:
+          bun-version: "0.5.6"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Typecheck source code
+        run: bun run typecheck
+      
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
