@@ -7,6 +7,12 @@
     "test": "vitest",
     "release": "bumpp"
   },
+  "repository": "https://github.com/nwylynko/react-raw-hooks",
+  "author": {
+    "name": "Nick Wylynko",
+    "email": "nick@wylynko.com",
+    "url": "https://nick.wylynko.com/"
+  },
   "sideEffects": false,
   "files": [
     "hooks"
