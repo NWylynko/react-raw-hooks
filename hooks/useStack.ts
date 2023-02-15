@@ -19,7 +19,7 @@ export const useStack = <T,>(initialStack: T[] = [], options: Partial<Options> =
   };
 
   const stack = fullStack.slice(0, pointer);
-  const topOfStack: T | undefined = stack[pointer - 1];
+  const topOfStack = stack[pointer - 1];
   const canMoveBackwards = pointer > minStackCount;
   const canMoveForwards = pointer < fullStack.length;
 
